@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responda: Você está vivo?</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Você está vivo?</h1>
+    <form id="formulario">
+        <input type="radio" id="sim" name="vivo" value="sim">
+        <label for="sim">Sim</label>
+        <br>
+        <input type="radio" id="nao" name="vivo" value="nao">
+        <label for="nao">Não</label>
+        <br>
+        <!-- Altere o tipo de botão para "button" para evitar o envio do formulário -->
+        <input type="button" value="Enviar" onclick="mostrarMensagem()">
+    </form>
+
+    <div id="resposta"></div>
+
+    <a id="linkVoltar" style="display: none;" href="Index.html">Voltar para Index</a>
+
+    <script>
+        function mostrarMensagem() {
+            const formulario = document.getElementById('formulario');
+            const respostaElement = document.getElementById('resposta');
+            const linkVoltar = document.getElementById('linkVoltar');
+
+            // Verifica se a opção "Sim" foi selecionada
+            if (formulario.vivo.value === 'sim') {
+                respostaElement.textContent = `ok ^^`;
+            }
+            // Verifica se a opção "Não" foi selecionada
+            else if (formulario.vivo.value === 'nao') {
+                respostaElement.textContent = `mentiroso 😔`;
+            }
+
+            // Exibe a resposta piscando
+            respostaElement.classList.add('blink');
+            
+            // Exibe o botão de voltar após a resposta ser exibida
+            linkVoltar.style.display = 'inline-block';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+body, html {
+    height: 100%;
+    margin: 10px;
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin: 30px;
+}
+
+.pergunta {
+    text-align: left;
+    display: block;
+    flex-direction: column;
+    align-items: left;
+}
+
+label {
+    font-size: 24px; /* Alteração para fonte de tamanho 14px */
+    margin-bottom: 5px; /* Espaçamento entre os campos */
+    display: block; /* Faz com que cada label seja exibida em uma linha separada */
+}
+
+#resposta {
+    font-size: 24px;
+    animation: blink 1s infinite;
+}
+
+/* Alteração para fonte de tamanho 14px */
+input[type="text"],
+input[type="tel"],
+input[type="email"] {
+    width: 500px; /* Alteração para aumentar a largura dos campos */
+    font-size: 18px;
+    margin-bottom: 10px; /* Espaçamento entre os campos */
+    display: block; /* Faz com que cada input seja exibido em uma linha separada */
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}

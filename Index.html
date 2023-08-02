@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário Captação de E-mails</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Formulário Captação de E-mails</h1>
+            <p>v1.0</p>
+        </div>
+
+        <div class="pergunta">
+            <label for="nome">Nome:</label>
+            <!-- Adicione o atributo "maxlength" para limitar o número máximo de caracteres a 100 -->
+            <input type="text" id="nome" maxlength="100">
+            
+            <label for="telefone">Telefone:</label>
+            <!-- Adicione uma função para formatar o telefone com () automaticamente -->
+            <input type="tel" id="telefone" oninput="formatarTelefone()" maxlength="15">
+            
+            <label for="email">E-mail:</label>
+            <!-- Adicione a validação do e-mail utilizando o atributo "pattern" -->
+            <input type="email" id="email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" required>
+            
+            <!-- Adicione um evento onkeydown para chamar a função mostrarOi() quando a tecla Enter for pressionada -->
+            <input type="button" value="Enviar" onclick="mostrarOi()">
+        </div>
+
+        <p id="resposta"></p>
+
+        <h1 class="center">Você está vivo?</h1>
+        <a class="center" href="2.html">Clique aqui para responder</a>
+    </div>
+
+    <script>
+        function mostrarOi() {
+            const nomeElement = document.getElementById('nome');
+            const telefoneElement = document.getElementById('telefone');
+            const emailElement = document.getElementById('email');
+            const respostaElement = document.getElementById('resposta');
+            
+            // Verifica se o nome não está vazio
+            if (nomeElement.value.trim() === '') {
+                respostaElement.textContent = `Por favor, informe o nome.`;
+                return;
+            }
+            
+            // Verifica se o telefone é válido
+            const telefonePattern = /^\(\d{2}\) \d{4,5}-\d{4}$/;
+            if (!telefonePattern.test(telefoneElement.value)) {
+                respostaElement.textContent = `Por favor, informe um telefone válido no formato (XX) XXXX-XXXX ou (XX) XXXXX-XXXX.`;
+                return;
+            }
+
+            // Verifica se o e-mail é válido
+            if (emailElement.value.trim() === '') {
+                respostaElement.textContent = `Por favor, informe um e-mail.`;
+                return;
+            }
+            
+            if (!emailElement.checkValidity()) {
+                respostaElement.textContent = `Por favor, informe um e-mail válido.`;
+                return;
+            }
+
+            // Verifica se o e-mail contém ".com"
+            if (!emailElement.value.includes(".com")) {
+                respostaElement.textContent = `Por favor, informe um e-mail válido que contenha ".com".`;
+                return;
+            }
+
+            // Se todas as informações estiverem corretas, exibe a mensagem de cadastro e atualiza a página após 2 segundos
+            respostaElement.textContent = `Cadastro registrado! Aguarde...`;
+            setTimeout(function() {
+                location.reload();
+            }, 2000);
+        }
+
+        function formatarTelefone() {
+            const telefoneElement = document.getElementById('telefone');
+            let telefone = telefoneElement.value;
+            // Remova qualquer caractere não numérico do telefone
+            telefone = telefone.replace(/\D/g, '');
+
+            // Formata o telefone no formato "(XX) XXXX-XXXX" ou "(XX) XXXXX-XXXX"
+            if (telefone.length === 10) {
+                telefone = '(' + telefone.substring(0, 2) + ') ' + telefone.substring(2, 6) + '-' + telefone.substring(6, 10);
+            } else if (telefone.length > 2) {
+                telefone = '(' + telefone.substring(0, 2) + ') ' + telefone.substring(2, 7) + '-' + telefone.substring(7, 11);
+            }
+
+            // Atualiza o valor do campo de telefone
+            telefoneElement.value = telefone;
+        }
+    </script>
+</body>
+</html>
