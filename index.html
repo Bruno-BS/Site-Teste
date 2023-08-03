@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+<audio id="audio" autoplay loop>
+  <source src="bomdia.mp3" type="audio/mpeg">
+  Seu navegador não suporta a reprodução de áudio.
+</audio>
+
+    <img id="caveira" src="caveira.gif" alt="Caveira">
+
     <div class="container">
         <div class="header">
             <h1>Formulário Captação de E-mails</h1>
@@ -57,6 +65,28 @@
     </div>
 
     <script>
+
+            // Obtém o elemento de áudio
+            const audio = document.getElementById('audio');
+
+            // Obtém o elemento da imagem da caveira
+            const caveira = document.getElementById('caveira');
+
+            // Inicia a reprodução da música automaticamente
+            audio.play();
+
+            // Adiciona o evento de clique à imagem (opcional)
+            caveira.addEventListener('click', function() {
+            // Verifica se a música está tocando e pausa ou reproduz conforme necessário
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+                }
+            });
+
+
+
         function mostrarOi() {
             const nomeElement = document.getElementById('nome');
             const telefoneElement = document.getElementById('telefone');
